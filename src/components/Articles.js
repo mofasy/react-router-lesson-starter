@@ -5,7 +5,7 @@ import {
   filterArticles,
 } from '../features/articles/articlesSlice';
 import Search from './Search';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Import Link from React Router
 
@@ -13,10 +13,12 @@ export default function Articles() {
   const articles = useSelector(selectArticles);
 
   // grab the search value from useLocation()
+  const { search } = useLocation();
 
   // get the queryParams from new URLSearchParams()
+  const queryParams = URLSearchParams(search);
 
-  const title = ''; // <-- fix me!
+  const title = queryParams.get('title'); // <-- fix me!
 
   const filteredArticles = title
     ? filterArticles(title, articles)
